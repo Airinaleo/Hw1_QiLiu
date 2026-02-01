@@ -21,6 +21,8 @@ The orientation was confusing. I added room_point and external_point as anchors.
 5. Gravity Issues 
 The player kept falling. I fixed this by setting the Tracking Mode to Floor and disabling Use Gravity in the Move Provider.
 
+6. In the additional work, I modified the size, color, and material of the downloaded model. Though the current result is not perfect, it will be refined in Homework 2. Besides, basic code adjustments and controller assignment (e.g., drag-and-drop) were done.
+
 Summary
 This was much harder than expected. Since I am remote, I couldn't visit TS135. However, I aim to do better in HW2. Thanks to Elmeri Uotila and Paula for your patience.
 
