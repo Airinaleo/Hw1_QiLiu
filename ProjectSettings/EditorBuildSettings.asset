@@ -8,11 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/hw1test.unity
     guid: 5b48e5e80b35643f39bb60b3cf4b0594
-  - enabled: 1
+  - enabled: 0
     path: Assets/BetterRoom.unity
     guid: ccf8732773a034bd6b9dda00a12de1fa
+  - enabled: 1
+    path: Assets/hw2.unity
+    guid: 83ac164ee01ab48d09587a0ebfabe9b1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 5282c70c0c0bf44ad9be9e056414c3cd, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 5297de23ab4494854af90dfd35471571, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 16703adfd0df04c17a648aeadf78abd2, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 044eee53f807142e2a12a12601512bb3, type: 2}
