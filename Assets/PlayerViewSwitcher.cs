@@ -1,72 +1,60 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerViewSwitcher : MonoBehaviour
+// 仅保留视角切换+Y轴抬高核心逻辑，新手零出错
+public class SimpleViewSwitcher : MonoBehaviour
 {
-    [Header("Teleport Anchors")]
-    // 在场景里创建两个空物体，摆放在你想去的地方，然后拖到这里
-    public Transform roomAnchor; 
-    public Transform externalAnchor; 
+    public Transform roomAnchor;     // 拖入根目录的room point
+    public Transform externalAnchor; // 拖入根目录的external point
+    public InputActionReference toggleViewAction; // 绑定手柄按键
 
-    [Header("Input Settings")]
-    public InputActionReference toggleViewAction;
+    private CharacterController cc;
+    // 手柄/XR Origin离地高度（固定0.1米，避免贴地面）
+    private readonly float groundOffset = 0.1f;
 
-    // 默认在房间内
-    private bool isInRoom = true;
-
-    private void Start()
+    void Start()
     {
-        // 初始状态：确保玩家对齐到房间锚点
+        // 抓取CharacterController，设置初始位置
+        cc = GetComponent<CharacterController>();
         if (roomAnchor != null)
         {
-            MatchTransform(roomAnchor);
+            // 初始位置：锚点X/Z + 抬高Y轴0.1米
+            transform.position = new Vector3(roomAnchor.position.x, groundOffset, roomAnchor.position.z);
         }
+        // 强制抬高CharacterController，避免贴地
+        cc.center = new Vector3(0, 0.85f, 0);
+        cc.height = 1.7f;
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         if (toggleViewAction != null)
         {
             toggleViewAction.action.Enable();
-            toggleViewAction.action.performed += OnToggleView;
+            toggleViewAction.action.performed += SwitchView;
         }
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         if (toggleViewAction != null)
         {
-            toggleViewAction.action.performed -= OnToggleView;
+            toggleViewAction.action.performed -= SwitchView;
+            toggleViewAction.action.Disable();
         }
     }
 
-    private void OnToggleView(InputAction.CallbackContext context)
+    // 核心：切换视角时始终抬高Y轴
+    void SwitchView(InputAction.CallbackContext ctx)
     {
-        // 第一次按下：isInRoom 变成 false，执行去往室外的逻辑
-        isInRoom = !isInRoom;
-
-        if (isInRoom)
-        {
-            MatchTransform(roomAnchor);
-        }
-        else
-        {
-            MatchTransform(externalAnchor);
-        }
-    }
-
-    private void MatchTransform(Transform target)
-    {
-        if (target == null) return;
-
-        // 设置位置
-        transform.position = target.position;
-
-        // 根据要求：控制 Y 轴旋转确保正对目标
-        // 我们提取目标锚点的 Y 轴角度，其余轴（X, Z）保持 0 确保玩家是直立的
-        float targetYRotation = target.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
-
-        Debug.Log($"Player moved to: {target.name}");
+        // 切换锚点
+        Transform target = transform.position == new Vector3(roomAnchor.position.x, groundOffset, roomAnchor.position.z) 
+            ? externalAnchor : roomAnchor;
+        
+        // 禁用CC避免物理冲突，设置位置（强制抬高Y轴）
+        cc.enabled = false;
+        transform.position = new Vector3(target.position.x, groundOffset, target.position.z);
+        transform.rotation = Quaternion.Euler(0, target.eulerAngles.y, 0);
+        cc.enabled = true;
     }
 }

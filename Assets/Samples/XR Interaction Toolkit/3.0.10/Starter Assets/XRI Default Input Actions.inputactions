@@ -28,7 +28,7 @@
                     "name": "Is Tracked",
                     "type": "Button",
                     "id": "6bb4e248-e42b-47c3-b66c-79566508ca74",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1363,7 +1363,7 @@
                 {
                     "name": "",
                     "id": "8e383b1a-270f-4c20-819b-89a59cffb498",
-                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "path": "<XRSimulatedController>/primary2DAxis",
                     "interactions": "",
                     "processors": "StickDeadzone",
                     "groups": "",
@@ -2391,7 +2391,7 @@
                     "name": "Grab Move",
                     "type": "Button",
                     "id": "cfb29d37-3db0-4e5d-a73b-7d48a19e279e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
