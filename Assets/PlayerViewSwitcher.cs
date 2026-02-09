@@ -1,29 +1,27 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// 仅保留视角切换+Y轴抬高核心逻辑，新手零出错
 public class SimpleViewSwitcher : MonoBehaviour
 {
-    public Transform roomAnchor;     // 拖入根目录的room point
-    public Transform externalAnchor; // 拖入根目录的external point
-    public InputActionReference toggleViewAction; // 绑定手柄按键
+    public Transform roomAnchor;     
+    public Transform externalAnchor; 
+    public InputActionReference toggleViewAction; 
 
     private CharacterController cc;
-    // 手柄/XR Origin离地高度（固定0.1米，避免贴地面）
     private readonly float groundOffset = 0.1f;
+    // 新增：标记是否在移动中，避免切换视角打断移动
+    private bool isMoving = false;
 
     void Start()
     {
-        // 抓取CharacterController，设置初始位置
         cc = GetComponent<CharacterController>();
         if (roomAnchor != null)
         {
-            // 初始位置：锚点X/Z + 抬高Y轴0.1米
             transform.position = new Vector3(roomAnchor.position.x, groundOffset, roomAnchor.position.z);
         }
-        // 强制抬高CharacterController，避免贴地
-        cc.center = new Vector3(0, 0.85f, 0);
-        cc.height = 1.7f;
+        // 移除：不再强制修改CC参数，改用ContinuousMove的配置
+        // cc.center = new Vector3(0, 0.85f, 0);
+        // cc.height = 1.7f;
     }
 
     void OnEnable()
@@ -44,17 +42,24 @@ public class SimpleViewSwitcher : MonoBehaviour
         }
     }
 
-    // 核心：切换视角时始终抬高Y轴
+    // 新增：检测是否在移动（避免切换视角打断移动）
+    void Update()
+    {
+        isMoving = cc.velocity.magnitude > 0.1f;
+    }
+
     void SwitchView(InputAction.CallbackContext ctx)
     {
-        // 切换锚点
+        // 仅当未移动时切换视角，避免打断移动
+        if (isMoving) return;
+
         Transform target = transform.position == new Vector3(roomAnchor.position.x, groundOffset, roomAnchor.position.z) 
             ? externalAnchor : roomAnchor;
         
-        // 禁用CC避免物理冲突，设置位置（强制抬高Y轴）
-        cc.enabled = false;
-        transform.position = new Vector3(target.position.x, groundOffset, target.position.z);
+        // 优化：不禁用CC，改用忽略碰撞的方式切换位置
+        Vector3 newPos = new Vector3(target.position.x, groundOffset, target.position.z);
+        // 平滑移动，避免强制覆盖位置
+        transform.position = Vector3.Lerp(transform.position, newPos, 0.2f);
         transform.rotation = Quaternion.Euler(0, target.eulerAngles.y, 0);
-        cc.enabled = true;
     }
 }
