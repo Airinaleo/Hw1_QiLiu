@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/BetterRoom.unity
     guid: ccf8732773a034bd6b9dda00a12de1fa
-  - enabled: 0
+  - enabled: 1
     path: Assets/hw2.unity
     guid: 83ac164ee01ab48d09587a0ebfabe9b1
   - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/3.0.10/Hands Interaction Demo/HandsDemoScene.unity
     guid: 3ff35cecbcc52cc42945cf531638a60a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/3.0.10/Starter Assets/DemoScene.unity
     guid: 319dafa5c80f29f428dc1e0d03f04177
   m_configObjects:
