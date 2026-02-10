@@ -3334,6 +3334,74 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "VRController",
+            "id": "6dd3c63d-eeaa-447d-97c6-13e93fd45b1c",
+            "actions": [
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "fd3497ee-d3cb-4922-81a9-8767fa5a8a8e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LightSwitch",
+                    "type": "Button",
+                    "id": "93e5fedf-3036-4b7b-9286-4f31cfa7ca94",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlayPositionSwitch",
+                    "type": "Value",
+                    "id": "2afbc789-2463-4caf-99bf-a86c37e479aa",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1b9b27c-f9fb-421b-bac1-5f934ec3fd77",
+                    "path": "<OculusTouchController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a860aac-4be6-4c01-b18b-4185937fa296",
+                    "path": "<OculusTouchController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1786f286-35ba-46c8-a7e3-07b232010d92",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayPositionSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

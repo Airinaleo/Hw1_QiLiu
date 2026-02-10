@@ -26,12 +26,12 @@
                 },
                 {
                     "name": "Playerposition",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2e5c5977-481c-4c08-b959-618244dc3cd3",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -65,6 +65,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Playerposition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "XRI Default Input Actions",
+            "id": "40a6e48f-7c5f-4827-85af-7cb0d41d5890",
+            "actions": [
+                {
+                    "name": "Joystick",
+                    "type": "Button",
+                    "id": "4bb7d335-270f-41d1-96e1-91966469b537",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77b47b57-a1c9-47b0-9754-ba706065fd1f",
+                    "path": "<OculusTouchController>{LeftHand}/{Primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Joystick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
